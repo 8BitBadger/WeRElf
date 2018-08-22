@@ -37,13 +37,14 @@ public class GameManager : MonoBehaviour
     Waves wave;
 
     //Used for building
+    [HideInInspector]
     public float food;
 
     //The components needed for the food display on manual
     //Number Sprites
     public Sprite[] numbers = new Sprite[10];
-    public SpriteRenderer singleDigits, doubleDigits;
-public GameObject foodDisplay;
+    public SpriteRenderer singleDigits, doubleDigits , wavesingleDigits, wavedoubleDigits;
+public GameObject foodDisplay, waveDisplay;
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,7 @@ public GameObject foodDisplay;
     void Update()
     {
         UpdateFoodDisplay();
+        UpdateWaveDisplay();
 
         if (win && !winTriggered)
         {
@@ -94,7 +96,9 @@ public GameObject foodDisplay;
         startScreen.SetActive(false);
         startScreenActive = false;
         map.NewMap();
-        wave.CountDown();
+        wave.startTimer = Time.time;
+        wave.startCountdown = true;
+        waveDisplay.SetActive(true);
 
     }
 
@@ -110,9 +114,14 @@ public GameObject foodDisplay;
         loseScreen.SetActive(true);
     }
 
-    public void TogleFoodDisplay()
+    public void DisplayFoodPanel()
     {
-        foodDisplay.SetActive(!foodDisplay.activeSelf);
+        foodDisplay.SetActive(true);
+    }
+
+    public void HideFoodPanel()
+    {
+        foodDisplay.SetActive(false);
     }
 
     void UpdateFoodDisplay()
@@ -143,6 +152,37 @@ public GameObject foodDisplay;
         if (singleDigit == 8) singleDigits.sprite = numbers[8];
         if (singleDigit == 9) singleDigits.sprite = numbers[9];
         if (singleDigit == 0) singleDigits.sprite = numbers[0];
+
+    }
+
+    void UpdateWaveDisplay()
+    {
+        //Keeps the fod display panel where the camera is at the moment
+        waveDisplay.transform.position = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
+
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 1) wavedoubleDigits.sprite = numbers[1];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 2) wavedoubleDigits.sprite = numbers[2];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 3) wavedoubleDigits.sprite = numbers[3];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 4) wavedoubleDigits.sprite = numbers[4];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 5) wavedoubleDigits.sprite = numbers[5];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 6) wavedoubleDigits.sprite = numbers[6];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 7) wavedoubleDigits.sprite = numbers[7];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 8) wavedoubleDigits.sprite = numbers[8];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 9) wavedoubleDigits.sprite = numbers[9];
+        if (Mathf.FloorToInt(wave.WaveCountdown() / 10) == 0) wavedoubleDigits.sprite = numbers[0];
+
+        int doubleDigit = Mathf.FloorToInt(wave.WaveCountdown() / 10);
+        int singleDigit = Mathf.FloorToInt(wave.WaveCountdown() - doubleDigit * 10);
+        if (singleDigit == 1) wavesingleDigits.sprite = numbers[1];
+        if (singleDigit == 2) wavesingleDigits.sprite = numbers[2];
+        if (singleDigit == 3) wavesingleDigits.sprite = numbers[3];
+        if (singleDigit == 4) wavesingleDigits.sprite = numbers[4];
+        if (singleDigit == 5) wavesingleDigits.sprite = numbers[5];
+        if (singleDigit == 6) wavesingleDigits.sprite = numbers[6];
+        if (singleDigit == 7) wavesingleDigits.sprite = numbers[7];
+        if (singleDigit == 8) wavesingleDigits.sprite = numbers[8];
+        if (singleDigit == 9) wavesingleDigits.sprite = numbers[9];
+        if (singleDigit == 0) wavesingleDigits.sprite = numbers[0];
 
     }
 }

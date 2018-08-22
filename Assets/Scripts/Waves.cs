@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Waves : MonoBehaviour
 {
-    float level = 0;
+    float level = 1;
     int levelOfEnemies = 0;
     int enemiesToSpawn = 0;
 
     //Used for the wave timer
-    int timeBetweenWaves = 10;
+    int timeBetweenWaves = 20;
     float timer = 0;
+    int timeRemaining;
+    [HideInInspector]
+    public float startTimer;
 
     public GameObject OrcLvl1;
     public GameObject OrcLvl2;
@@ -19,6 +22,9 @@ public class Waves : MonoBehaviour
     public GameObject OrcLvl5;
 
     List<GameObject> enemyList;
+
+    [HideInInspector]
+    public bool startCountdown = false;
 
     //The player must survive 20 waves
     //This class needs to keep track of all the enemies in every wave
@@ -33,22 +39,33 @@ public class Waves : MonoBehaviour
 
     public void CountDown()
     {
-        if((Time.time - timer) > timeBetweenWaves)
+        timeRemaining = Mathf.FloorToInt(timeBetweenWaves - (Time.time - startTimer - timer));
+        if ((Time.time - startTimer - timer) > timeBetweenWaves)
         {
+            //Reset the timer to start over again
             timer = Time.time;
+            startTimer = 0;
             StartWave();
         }
+    }
+
+    public int WaveCountdown()
+    {
+        return timeRemaining; 
     }
 
     // Use this for initialization
     void StartWave()
     {
+
+        print("Starting wave");
         //Gets the amount of enemies to spawn for he level
         enemiesToSpawn = Random.Range(0, 5);
+        print("Enemies to spawn = " + enemiesToSpawn);
         //Get the level of the enemies to spawn
-        levelOfEnemies = 1;//Mathf.RoundToInt(level / 5);
+        levelOfEnemies = Mathf.CeilToInt(level / 5);
+        print("level Of Enemies = " + levelOfEnemies);
         //Select a side to spawn on and the spawn point on that side
-        //North = 0, South = 1, East = 2, West = 3;
         Vector2 spawnPoint = Vector2.zero;
 
         
@@ -87,16 +104,13 @@ public class Waves : MonoBehaviour
                 GameObject tempEnemy = Instantiate(OrcLvl5, spawnPoint, Quaternion.identity);
                 enemyList.Add(tempEnemy);
             }
-
-            
-            
         }
     }
 
     // Update is called once per frame
     void Update()
-    { 
-        for(int i = 0; i < enemyList.Count; i++)
+    {
+        for (int i = 0; i < enemyList.Count; i++)
         {
             if(enemyList[i].GetComponent<Orc>().Health <= 0)
             {
@@ -106,7 +120,7 @@ public class Waves : MonoBehaviour
         }
 
         //When all of the enemies are destroyed we start the new countdown for the next wave 'and 
-        if (enemyList.Count == 0)
+        if (enemyList.Count == 0 && startCountdown)
         {
             level++;
             CountDown();

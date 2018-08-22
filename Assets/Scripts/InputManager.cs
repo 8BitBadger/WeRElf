@@ -105,18 +105,19 @@ public class InputManager : MonoBehaviour
 
                 if (!controlPanel.activeSelf && tileInfo.CanBuild)
                 {
-                
-                    //We set the originalClickPosition here becuase it wil only be set one as the control panel is not active
-                    buildMousePos = mousePos;
-                    //Check if the control panel is active and if it is not make it active
+                                    //Check if the control panel is active and if it is not make it active
                     controlPanel.SetActive(true);
 //Display the food panel when the mouse is clicked
-                    if(tileInfo.CanBuild) gameManager.TogleFoodDisplay();
+                    gameManager.DisplayFoodPanel();
+                    //We set the originalClickPosition here becuase it wil only be set one as the control panel is not active
+                    buildMousePos = mousePos;
+
                     //Get teh tile and the tile game object ot modify and check for the tile status
                     //tileInfo = map.GetTileAtPos(mousePos);
 
                     if (tileInfo != null)
                     {
+
                         //If te tree has a tree
                         if (!tileInfo.HasTree)
                         {
@@ -170,7 +171,7 @@ public class InputManager : MonoBehaviour
                             controlPanel.transform.GetChild(1).gameObject.SetActive(false);
                             controlPanel.SetActive(false);
                             //Display the food panel when the mouse is clicked
-                            gameManager.TogleFoodDisplay();
+                            gameManager.HideFoodPanel();
 
                         }
                         else if (mouseHit.collider.name == "TowerGOButton")
@@ -193,7 +194,7 @@ public class InputManager : MonoBehaviour
                             controlPanel.transform.GetChild(0).gameObject.SetActive(false);
                             controlPanel.SetActive(false);
                             //Display the food panel when the mouse is clicked
-                            gameManager.TogleFoodDisplay();
+                            gameManager.HideFoodPanel();
                         }
                         else if (mouseHit.collider.name == "FarmGOButton")
                         {
@@ -213,7 +214,7 @@ public class InputManager : MonoBehaviour
                             controlPanel.transform.GetChild(2).gameObject.SetActive(false);
                             controlPanel.SetActive(false);
                             //Display the food panel when the mouse is clicked
-                            gameManager.TogleFoodDisplay();
+                            gameManager.HideFoodPanel();
                         }
                         else
                         {
@@ -225,7 +226,7 @@ public class InputManager : MonoBehaviour
                         //If the panel active but the press was not on the control panel then we disable the control panel again
                         controlPanel.SetActive(false);
                         //Display the food panel when the mouse is clicked
-                        gameManager.TogleFoodDisplay();
+                        gameManager.HideFoodPanel();
                     }
                 }
             }
