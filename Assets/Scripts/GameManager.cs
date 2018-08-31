@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool lose = false, loseTriggered = false;
     public GameObject loseScreen;
 
-    
+
 
     //The start screen variables
     [HideInInspector]
@@ -38,13 +38,17 @@ public class GameManager : MonoBehaviour
 
     //Used for building
     [HideInInspector]
-    public float food;
+    public float food = 0;
 
     //The components needed for the food display on manual
     //Number Sprites
     public Sprite[] numbers = new Sprite[10];
-    public SpriteRenderer singleDigits, doubleDigits , wavesingleDigits, wavedoubleDigits;
-public GameObject foodDisplay, waveDisplay;
+    public SpriteRenderer singleDigits, doubleDigits, wavesingleDigits, wavedoubleDigits;
+    public GameObject foodDisplay, waveDisplay;
+
+    int winLoseScreenTimer = 3;
+    float winLoseTimer = 0;
+    float startTimer = 0;
 
     // Use this for initialization
     void Start()
@@ -66,14 +70,18 @@ public GameObject foodDisplay, waveDisplay;
         UpdateFoodDisplay();
         UpdateWaveDisplay();
 
+        if (wave.Level > 20) win = true;
+
         if (win && !winTriggered)
         {
             winTriggered = true;
             Win();
         }
 
-        if (lose && !loseTriggered)
+        if (map.lose && !loseTriggered)
         {
+            startTimer = Time.time;
+            waveDisplay.SetActive(false);
             loseTriggered = true;
             Lose();
         }
@@ -104,14 +112,25 @@ public GameObject foodDisplay, waveDisplay;
 
     void Win()
     {
-
+        winScreen.transform.position = new Vector2(cam.transform.position.x, cam.transform.position.y);
         winScreen.SetActive(true);
+
+        if ((Time.time - startTimer - winLoseTimer) > winLoseScreenTimer)
+        {
+            Application.Quit();
+        }
     }
+
 
     void Lose()
     {
-
+        loseScreen.transform.position = new Vector2(cam.transform.position.x, cam.transform.position.y);
         loseScreen.SetActive(true);
+
+        if ((Time.time - startTimer - winLoseTimer) > winLoseScreenTimer)
+        {
+            Application.Quit();
+        }
     }
 
     public void DisplayFoodPanel()

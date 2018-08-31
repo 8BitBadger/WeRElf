@@ -828,10 +828,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   win: 0
   winTriggered: 0
-  winScreen: {fileID: 0}
+  winScreen: {fileID: 1569157933917440, guid: f0639cae989e528428b1357f544e402d, type: 2}
   lose: 0
   loseTriggered: 0
-  loseScreen: {fileID: 0}
+  loseScreen: {fileID: 1493254869036916, guid: 6aed5b8ab4af72341930ecb381f484de, type: 2}
   startScreenActive: 1
   startScreen: {fileID: 1550773878}
   fadeScreenActive: 0
@@ -1873,52 +1873,6 @@ Transform:
   m_Father: {fileID: 1578741793}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1848587378
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 11.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4889131310193550, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038550517369518, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2e12f887c12d3d94984a99febf24292b, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1957604230
 GameObject:
   m_ObjectHideFlags: 0

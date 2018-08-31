@@ -144,6 +144,7 @@ public class Tree : MonoBehaviour
             if (col.tag == "Orc")
             {
                 col.GetComponent<Orc>().TakeDamage();
+                col.GetComponent<Orc>().SetTarget(transform);
             }
         }
     }

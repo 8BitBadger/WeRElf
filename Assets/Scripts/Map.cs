@@ -28,6 +28,8 @@ public class Map : MonoBehaviour
     List<GameObject> trees;
     //The number of the tree sprite used, used later for upgrades
     int treeSprite;
+    //A bool to check if themother tree has been destoyed
+    public bool lose = false;
 
     //Tile Sprite list
     public Sprite[] tileSprites;
@@ -51,8 +53,17 @@ public class Map : MonoBehaviour
         {
             if (trees[i].GetComponent<Tree>().Health <= 0)
             {
+                if (trees[i].GetComponent<Tree>().IsMotherTree)
+                {
+                    Destroy(trees[i]);
+                    trees.RemoveAt(i);
+                    lose = true;
+                }
+                else
+                { 
                 Destroy(trees[i]);
                 trees.RemoveAt(i);
+            }
             }
         }
     }

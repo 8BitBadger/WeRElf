@@ -5,10 +5,14 @@ using UnityEngine;
 public class Orc : MonoBehaviour
 {
     //The stats of the orc
-    private int health;
+    [HideInInspector]
+    public int health = 5;
+    [HideInInspector]
     public int damage = 1;
+    [HideInInspector]
     public int attackInterval;
     float lastAttackTime = 0;
+    [HideInInspector]
     public int attackRange;
 
     //If the orc fires an arrow

@@ -9,7 +9,8 @@ public class Waves : MonoBehaviour
     int enemiesToSpawn = 0;
 
     //Used for the wave timer
-    int timeBetweenWaves = 20;
+    //int timeBetweenWaves = 20;
+    int timeBetweenWaves = 2;
     float timer = 0;
     int timeRemaining;
     [HideInInspector]
@@ -25,6 +26,11 @@ public class Waves : MonoBehaviour
 
     [HideInInspector]
     public bool startCountdown = false;
+
+    public float Level
+    {
+        get{return level;}
+    }
 
     //The player must survive 20 waves
     //This class needs to keep track of all the enemies in every wave
@@ -57,18 +63,15 @@ public class Waves : MonoBehaviour
     // Use this for initialization
     void StartWave()
     {
-
-        print("Starting wave");
         //Gets the amount of enemies to spawn for he level
-        enemiesToSpawn = Random.Range(0, 5);
-        print("Enemies to spawn = " + enemiesToSpawn);
+        //enemiesToSpawn = Random.Range(1, 5);
+        enemiesToSpawn = 5;
         //Get the level of the enemies to spawn
-        levelOfEnemies = Mathf.CeilToInt(level / 5);
-        print("level Of Enemies = " + levelOfEnemies);
+        //if(level < 5) levelOfEnemies = 1; else levelOfEnemies = Mathf.CeilToInt(level / 5);
         //Select a side to spawn on and the spawn point on that side
         Vector2 spawnPoint = Vector2.zero;
+        levelOfEnemies = 5;
 
-        
         //Run trough how many enemies must be made and spaw them
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -105,7 +108,8 @@ public class Waves : MonoBehaviour
                 enemyList.Add(tempEnemy);
             }
         }
-    }
+        print("Health = " + enemyList[0].GetComponent<Orc>().Health);
+    } 
 
     // Update is called once per frame
     void Update()
