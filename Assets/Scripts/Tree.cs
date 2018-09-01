@@ -50,6 +50,7 @@ public class Tree : MonoBehaviour
     public bool IsMotherTree
     {
         get { return isMotherTree; }
+        set { isMotherTree = value; }
     }
 
     public bool HasFarm

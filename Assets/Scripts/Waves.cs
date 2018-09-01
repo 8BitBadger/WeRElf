@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Waves : MonoBehaviour
 {
-    float level = 1;
+    int level = 1;
     int levelOfEnemies = 0;
     int enemiesToSpawn = 0;
 
     //Used for the wave timer
     //int timeBetweenWaves = 20;
-    int timeBetweenWaves = 2;
+    int timeBetweenWaves = 20;
     float timer = 0;
     int timeRemaining;
     [HideInInspector]
@@ -27,7 +27,7 @@ public class Waves : MonoBehaviour
     [HideInInspector]
     public bool startCountdown = false;
 
-    public float Level
+    public int Level
     {
         get{return level;}
     }
@@ -64,8 +64,7 @@ public class Waves : MonoBehaviour
     void StartWave()
     {
         //Gets the amount of enemies to spawn for he level
-        //enemiesToSpawn = Random.Range(1, 5);
-        enemiesToSpawn = 5;
+        enemiesToSpawn = Random.Range(1, 5);
         //Get the level of the enemies to spawn
         //if(level < 5) levelOfEnemies = 1; else levelOfEnemies = Mathf.CeilToInt(level / 5);
         //Select a side to spawn on and the spawn point on that side
@@ -108,7 +107,6 @@ public class Waves : MonoBehaviour
                 enemyList.Add(tempEnemy);
             }
         }
-        print("Health = " + enemyList[0].GetComponent<Orc>().Health);
     } 
 
     // Update is called once per frame
@@ -124,9 +122,14 @@ public class Waves : MonoBehaviour
         }
 
         //When all of the enemies are destroyed we start the new countdown for the next wave 'and 
-        if (enemyList.Count == 0 && startCountdown)
+        if (enemyList.Count == 0 )
         {
+            if(startCountdown)
+            {
+            startCountdown = false;
             level++;
+            }
+
             CountDown();
         }
     }

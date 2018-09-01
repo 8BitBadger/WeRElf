@@ -59,8 +59,12 @@ public class GameManager : MonoBehaviour
         map = GetComponent<Map>();
         //Get the reference to teh MainCamera
         cam = GameObject.FindGameObjectWithTag("64Cam").GetComponent<Camera>();
+        Camera.main.transform.position = new Vector3(map.Width / 2, map.Height / 2, Camera.main.transform.position.z);
+        cam.transform.position = new Vector3(map.Width / 2, map.Height / 2, cam.transform.position.z);
         //Set the waves script pointer here
         wave = GetComponent<Waves>();
+
+        startScreen.transform.position = new Vector3(map.Width / 2, map.Height / 2, 0);
 
     }
 
@@ -80,16 +84,17 @@ public class GameManager : MonoBehaviour
 
         if (map.lose && !loseTriggered)
         {
+            print("lose activated");
             startTimer = Time.time;
             waveDisplay.SetActive(false);
             loseTriggered = true;
             Lose();
         }
+
         if (!startScreenActive)
         {
             for (int i = 0; i < map.Trees.Count; i++)
             {
-
                 if ((Time.time - map.Trees[i].GetComponent<Tree>().lastFoodTime) > map.Trees[i].GetComponent<Tree>().interval)
                 {
                     map.Trees[i].GetComponent<Tree>().lastFoodTime = Time.time;
@@ -112,8 +117,7 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
-        winScreen.transform.position = new Vector2(cam.transform.position.x, cam.transform.position.y);
-        winScreen.SetActive(true);
+        GameObject lose = Instantiate(winScreen, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), cam.transform.rotation);
 
         if ((Time.time - startTimer - winLoseTimer) > winLoseScreenTimer)
         {
@@ -124,8 +128,7 @@ public class GameManager : MonoBehaviour
 
     void Lose()
     {
-        loseScreen.transform.position = new Vector2(cam.transform.position.x, cam.transform.position.y);
-        loseScreen.SetActive(true);
+        GameObject lose = Instantiate(loseScreen, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), cam.transform.rotation);
 
         if ((Time.time - startTimer - winLoseTimer) > winLoseScreenTimer)
         {

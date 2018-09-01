@@ -8,7 +8,7 @@ public class Tile
 
     Vector2 pos;
 
-    bool hasTree;
+    bool hasTree = false;
     bool canBuild = true;
 
     public bool HasTree

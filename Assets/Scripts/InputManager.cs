@@ -48,7 +48,10 @@ public class InputManager : MonoBehaviour
         currFramePosition = cam.ScreenToWorldPoint(Input.mousePosition);
         currFramePosition.z = 0;
 
-        UpdateCameraMovement();
+        if (!gameManager.winTriggered && !gameManager.loseTriggered)
+        {
+            UpdateCameraMovement();
+        }
 
         lastFramePosition = cam.ScreenToWorldPoint(Input.mousePosition);
         lastFramePosition.z = 0;
@@ -56,7 +59,7 @@ public class InputManager : MonoBehaviour
         //Keeps the control panel in the same position of hte screen we want it to be
         controlPanel.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - 3f, controlPanel.transform.position.z);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !gameManager.winTriggered && !gameManager.loseTriggered)
         {
 
             if (gameManager.win)

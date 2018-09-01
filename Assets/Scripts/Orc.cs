@@ -50,7 +50,11 @@ public class Orc : MonoBehaviour
     {
         if (target == null)
         {
-            target = GameObject.FindGameObjectWithTag("MotherTree").transform;
+            if(GameObject.FindGameObjectWithTag("MotherTree"))
+            {
+target = GameObject.FindGameObjectWithTag("MotherTree").transform;
+            }
+            
         }
         else
         {

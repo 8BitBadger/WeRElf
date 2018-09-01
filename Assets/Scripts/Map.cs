@@ -29,6 +29,7 @@ public class Map : MonoBehaviour
     //The number of the tree sprite used, used later for upgrades
     int treeSprite;
     //A bool to check if themother tree has been destoyed
+    [HideInInspector]
     public bool lose = false;
 
     //Tile Sprite list
@@ -157,6 +158,7 @@ public class Map : MonoBehaviour
             //Add the sprite renderer to the object and asign a sprite
             treeSprite = 0;
             tree_sr.sprite = motherTreeSprites[treeSprite];
+            tree_go.GetComponent<Tree>().IsMotherTree = true;
             tree_go.GetComponent<Tree>().treeSprite = treeSprite;
             tree_go.GetComponent<Tree>().AddTower();
             tree_go.GetComponent<Tree>().AddFarm();
@@ -169,8 +171,8 @@ public class Map : MonoBehaviour
             mTile.CanBuild = false;
             mTile = GetTileAtPos(_pos + new Vector2(0, -1));
             mTile.CanBuild = false;
-            mTile = GetTileAtPos(_pos);
-            mTile.HasTree = true;
+            //mTile = GetTileAtPos(_pos);
+            //mTile.HasTree = true;
             mTile = GetTileAtPos(_pos + new Vector2(0, 1));
             mTile.CanBuild = false;
             mTile = GetTileAtPos(_pos + new Vector2(-1, -1));

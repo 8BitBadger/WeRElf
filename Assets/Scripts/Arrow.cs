@@ -9,7 +9,8 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
-        float rot = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        Vector3 dir = new Vector3(target.x, target.y, 0) - transform.position;
+        float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot);
     }
 
